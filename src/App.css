@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.calculator {
+  background-color: #5bc6ff;
+  height: 400px;
+  width: 240px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  border-radius: 4%;
+  overflow: hidden;
+  box-shadow: 8px 8px 20px #121212, -8px -8px 20px #444444;
+}
+.display {
+  width: 100%;
+  height: 60px;
+  background: #cddce5;
+  box-shadow: inset 5px 5px 12px #8b969c, inset -5px -5px 12px #ffffff;
+  margin: 0.2em 0 1em;
+  text-align: right;
+  padding: 1em 0.2em 0.2em;
+  font-size: 24px;
+}
+.nums-container{
+width: 75%;
+}
+.ops-container{
+width: 25%;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  border-radius: 50%;
+  margin: 5px;
+  height: 50px;
+  width: 50px;
+  border: none;
+  background: linear-gradient(145deg, #42a7cf, #388cae);
+  box-shadow: 5px 5px 20px #378bac, -5px -5px 20px #45add6;
+  color: rgb(236, 228, 228);
+  font-size: larger;
+  font-weight: 700;
+  outline: none;
+}
+button:hover {
+opacity: .9;
+}
+button:active{
+  transform: scale(.9);
+}
+button.yellow {
+  margin-right: 0;
+  background: linear-gradient(145deg, #827c36, #9a9440);
+  box-shadow: 5px 5px 20px #378bac, -5px -5px 20px #45add6;
+}
+button.gray {
+  background: linear-gradient(145deg, #404e53, #364246);
+  box-shadow: 5px 5px 20px #378bac, -5px -5px 20px #45add6;
+}
+button.green {
+  background: linear-gradient(145deg, #437a4d, #4f905c);
+  box-shadow: 5px 5px 20px #378bac, -5px -5px 20px #45add6;
+}
+button.red {
+  width: 60%;
+  display: block;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #7d3232, #692a2a);
+  box-shadow: 5px 5px 20px #378bac, -5px -5px 20px #45add6;
+}
+button.big-h {
+  width: 110px;
+  border-radius: 50px;
+}
+button.big-v {
+  border-radius: 50px;
+  height: 110px;
 }
