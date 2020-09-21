@@ -7,78 +7,53 @@ const ops = ["/", "*", "-", "+", "="];
 class App extends Component {
   state = {
     lastPressed: undefined,
-    currentNumber: "0",
-    calc: undefined,
+    calc: '0',
     operation: undefined,
   };
 
   handleClick = (event) => {
-    const { currentNumber, calc, operation } = this.state;
+
+    const { calc , lastPressed } = this.state;
     const { innerText } = event.target;
 
-    this.setState({
-      lastPressed: innerText
-    })
-
-    if (!Number.isNaN(Number(innerText))) {
-      if (currentNumber === "0") {
-        this.setState({
-          currentNumber: innerText,
-        });
-      } else {
-        this.setState({
-          currentNumber: currentNumber + innerText,
-        });
-      }
-      return;
-    }
     switch (innerText) {
-      case "AC": {
+      case 'AC': {
         this.setState({
-          currentNumber: "0",
-          calc: undefined,
-          operation: undefined,
+          calc: '0'
         });
         break;
       }
-      case ".": {
-        if (!currentNumber.includes(".")) {
-          this.setState({
-            currentNumber: currentNumber + innerText,
-          });
-        }
+      case '=': {
+        const evaluated = eval(calc);
+        this.setState({
+          calc: evaluated
+        });
         break;
       }
       default: {
-        if (!operation) {
-          this.setState({
-            operation: innerText,
-            calc: currentNumber,
-            currentNumber: "",
-          });
-        } else if (innerText === "=") {
-          // eslint-disable-next-line no-eval
-          const evaluated = eval(`${calc} ${operation} ${currentNumber}`);
-          this.setState({
-            operation: undefined,
-            calc: evaluated,
-            currentNumber: evaluated,
-          });
-        }else {
-          const evaluated = eval(`${calc} ${operation} ${currentNumber}`);
-          
-          this.setState({
-            operation:innerText,
-            calc: evaluated,
-            currentNumber: evaluated,
-          });
+        let cNValue = undefined;
+        if( ops.includes(innerText)){
+          if(ops.includes(lastPressed) && innerText !== '-'){
+          cNValue= calc.slice(0,-3) + ` ${innerText} `;
+          }else{
+            cNValue = `${calc} ${innerText} `;
+          }
+        }else{
+          cNValue = calc === '0' ? innerText : (calc + innerText);
         }
+          this.setState({
+          calc: cNValue,
+          lastPressed: innerText
+        })
+
       }
     }
-  };
+
+
+  }
 
   render() {
-    const { currentNumber , calc , operation} = this.state;
+    const { calc } = this.state;
     return (
       <div className="calculator">
         <div
@@ -88,8 +63,8 @@ class App extends Component {
           {JSON.stringify(this.state)}
         </div>
         <div className="display" id="display">
-        <small className="calc-display">{calc} {operation}</small>
-          {currentNumber}
+          {/* <small className="calc-display">{calc}</small> */}
+          {calc}
         </div>
         <div className="nums-container">
           <button className="red" onClick={this.handleClick}>
